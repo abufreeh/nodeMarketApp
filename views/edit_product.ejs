@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <img src="<%= product.productImage %>" style="width:100%" />
+                </div>
+                <div class="col-lg-7">
+                    <h2><%= product.productName %></h2>
+                    <br/><br/><br/>
+                    <form action="/actions/editProductAction/<%= product._id %>" method="POST" id="addCategory_form">
+
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+                        <label for="productName">Product name</label>
+                        <input required type="text" name="productName" value="<%= product.productName %>" id="productName" class="form-control" />
+                        
+                        <label for="unitsInStock">Units in stock</label>
+                        <input required type="number" value="<%= product.unitsInStock %>" name="unitsInStock" id="unitsInStock" class="form-control" />
+                        
+                        <label for="productPrice">Product price</label>
+                        <input required type="text" value="<%= product.productPrice %>" name="productPrice" id="productPrice" class="form-control" />
+
+                        <label for="productDescription">Product description</label>
+                        <input required type="text" value="<%= product.productDescription %>" name="productDescription" id="productDescription" class="form-control" />
+
+                        <label for="productImage">Image</label>
+                        <input required type="text" value="<%= product.productImage %>" name="productImage" id="productImage" class="form-control" />
+                        
+                        <label for="categoryId">Category</label>
+                        <select name="categoryId" id="categoryId" class="form-select">
+                            <%for(let category of categories){%>
+                                <option <%= category._id.equals(product.categoryId) ? 'selected' : '' %> value="<%= category._id %>"><%=category.categoryName%></option>
+                            <%}%>
+                        </select>
+
+                        <input type="submit" form="addCategory_form" class="btn btn-info" style="width: 100%; margin-top: 20px" value="Update" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
+</html>

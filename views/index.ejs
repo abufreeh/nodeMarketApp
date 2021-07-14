@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">
+                    <h2>Create new account:</h2>
+                    <form id="register_form" action="/actions/register" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                        <label for="fullname">Full name</label>
+                        <input required type="text" name="fullname" id="fullname" class="form-control" />
+                        <label for="email">Email</label>
+                        <input required type="email" name="email" id="email" class="form-control" />
+                        <label for="email">Password</label>
+                        <input required type="password" name="password" id="password" class="form-control" />
+                        <input type="submit" form="register_form" class="btn btn-success" style="width: 100%; margin-top: 20px" value="Create new account" />
+                    </form>
+                    <br />
+                    <br />
+                    <h2>Login:</h2>
+                    <form id="login_form" action="/actions/login" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                        <label for="email">Email</label>
+                        <input required type="email" name="email" id="email_login" class="form-control" />
+                        <label for="email">Password</label>
+                        <input required type="password" name="password" id="password_login" class="form-control" />
+                        <input type="submit" form="login_form" class="btn btn-info" style="width: 100%; margin-top: 20px" value="Login" />
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
+</html>

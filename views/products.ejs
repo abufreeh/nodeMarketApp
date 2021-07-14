@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2>Forms</h2>
+                    <form action="/actions/addProduct/<%= category._id %>" method="POST" id="addCategory_form">
+                        <h3>Add new product:</h3>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+                        <label for="productName">Product name</label>
+                        <input required type="text" name="productName" id="productName" class="form-control" />
+                        
+                        <label for="unitsInStock">Units in stock</label>
+                        <input required type="number" name="unitsInStock" id="unitsInStock" class="form-control" />
+                        
+                        <label for="productPrice">Product price</label>
+                        <input required type="text" name="productPrice" id="productPrice" class="form-control" />
+
+                        <label for="productDescription">Product description</label>
+                        <input required type="text" name="productDescription" id="productDescription" class="form-control" />
+
+                        <label for="productImage">Image</label>
+                        <input required type="text" name="productImage" id="productImage" class="form-control" />
+                        
+                        <input type="submit" form="addCategory_form" class="btn btn-info" style="width: 100%; margin-top: 20px" value="Add" />
+                    </form>
+
+                    <br/><br/>
+                    <a href="/actions/logout" class="btn btn-danger">Logout</a>
+                </div>
+                <div class="col-lg-9">
+                    <h2><%= category.categoryName %></h2>
+                    <p><%= products.length %> products in category</p>
+                    <br/>
+
+                    <%if(products.length > 0){%>
+                        <table class="table table-stripes">
+                            <thead>
+                                <th>Product image</th>
+                                <th>Product name</th>
+                                <th>Price</th>
+                                <th>Units</th>
+                                <th>Is visible</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <%for(let product of products){%>
+                                    <tr>
+                                        <td><img src="<%= product.productImage %>" style="width:100px" /></td>
+                                        <td><%= product.productName %></td>
+                                        <td><%= product.productPrice %> &#8362;</td>
+                                        <td><%= product.unitsInStock %></td>
+                                        <td>
+                                            <%if(product.isVisible){%>
+                                                <div class="badge bg-success">Visible</div>
+                                            <%} else {%>
+                                                <div class="badge bg-danger">No Visible</div>
+                                            <%}%>
+                                        </td>
+                                        <td>
+                                            <a href="/actions/removeProduct/<%= product._id %>/<%= category._id%>" class="btn btn-danger">Delete</a>
+                                            <a href="/dashboard/editProduct/<%= product._id %>" class="btn btn-warning">Edit</a>
+                                            <a href="/dashboard/product/<%= product._id %>" class="btn btn-primary">Orders</a>
+                                        </td>
+                                    </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    <%} else {%>
+                        <p>There are no categories available</p>
+                    <%}%>
+
+
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
+</html>
